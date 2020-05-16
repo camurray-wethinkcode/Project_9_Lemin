@@ -21,5 +21,4 @@ Run the following commands:
 	- `make re`
 
 To run the program:
-
 `./lemin < path/to/map.txt`
