@@ -22,10 +22,10 @@ int			find_room(void *room, int flag)
 	now = (t_room *)room;
 	if (now->flag == flag)
 		return(0);
-	if (now->busy)
+	if (now->occupied)
 		return(-1);
 	quickest = FT_INT_MAX;
-	now->busy = 1;
+	now->occupied = 1;
 	try = now->paths;
 	while (try)
 	{
@@ -34,7 +34,7 @@ int			find_room(void *room, int flag)
 			quickest = lastpath + 1;
 		try = try->next;
 	}
-	now->busy = 0;
+	now->occupied = 0;
 	return(quickest == FT_INT_MAX ? -1 : quickest);
 }
 

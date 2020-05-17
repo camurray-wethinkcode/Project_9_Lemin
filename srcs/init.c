@@ -65,7 +65,7 @@ t_room		*start_room(char *line, int flag)
 		i++;
 	newroom->y = ft_atoi(line + i);
 	newroom->paths = NULL;
-	newroom->busy = 0;
+	newroom->occupied = 0;
 	newroom->filled = 0;
 	free(line);
 	return(newroom);
