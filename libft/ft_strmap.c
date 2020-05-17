@@ -21,7 +21,7 @@
 ** ft_strmap.c ft_strlen.c ft_strnew.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strmap(char const *s, char (*f)(char))
 {

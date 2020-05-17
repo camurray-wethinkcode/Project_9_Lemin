@@ -20,7 +20,7 @@
 ** ft_ispowerof2.c ft_putstr.c ft_putchar.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_ispowerof2(unsigned int n)
 {

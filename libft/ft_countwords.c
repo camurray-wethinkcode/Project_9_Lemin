@@ -22,7 +22,7 @@
 ** ft_countwords.c ft_strlen.c ft_putstr.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_countwords(const char *s, char c)
 {

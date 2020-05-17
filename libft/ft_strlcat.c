@@ -19,7 +19,7 @@
 ** ft_strlcat.c ft_strlen.c ft_memset.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {

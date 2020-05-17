@@ -19,7 +19,7 @@
 ** ft_toupper.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_toupper(int c)
 {

@@ -19,7 +19,7 @@
 ** ft_lstiter.c ft_lstnew.c ft_memalloc.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {

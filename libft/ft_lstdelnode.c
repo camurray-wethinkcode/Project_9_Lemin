@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_lstdelnode(t_list **head, t_list *node, void (*del)(void*, size_t))
 {

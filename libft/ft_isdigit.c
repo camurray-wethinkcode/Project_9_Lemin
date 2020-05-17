@@ -20,7 +20,7 @@
 ** ft_isdigit.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_isdigit(int c)
 {

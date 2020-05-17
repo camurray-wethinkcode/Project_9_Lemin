@@ -19,7 +19,7 @@
 ** ft_memset.c ft_strcpy.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

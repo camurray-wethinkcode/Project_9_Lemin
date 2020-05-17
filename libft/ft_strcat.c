@@ -18,7 +18,7 @@
 ** ft_strcat.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strcat(char *s1, const char *s2)
 {

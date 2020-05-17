@@ -20,7 +20,7 @@
 ** ft_islower.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_islower(int c)
 {

@@ -23,7 +23,7 @@
 ** ft_search_and_replace.c ft_strlen.c ft_putstr.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	ft_search_and_replace(char *str, char a, char b)
 {

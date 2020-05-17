@@ -19,7 +19,7 @@
 ** run gcc -Wall -Wextra -Werror
 ** ft_chardel.c ft_strlen.c ft_putstr.c
 */
-#include "libft.h"
+#include "include/libft.h"
 
 char	ft_chardel(char c)
 {

@@ -19,7 +19,7 @@
 ** ft_lstnew.c ft_memalloc.c ft_memcpy.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {

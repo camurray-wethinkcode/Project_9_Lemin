@@ -35,7 +35,7 @@
 ** ft_itoa.c ft_putstsr.c ft_strlen.c ft_memalloc.c ft_bzero.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 static int	length(int nb)
 {

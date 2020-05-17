@@ -22,7 +22,7 @@
 ** ft_strjoin.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strjoin(char const *s1, char	const *s2)
 {

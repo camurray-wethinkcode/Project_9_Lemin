@@ -18,7 +18,7 @@
 ** ft_memdel.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_memdel(void **ap)
 {

@@ -17,7 +17,7 @@
 ** ft_intlen.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_intlen(int n)
 {

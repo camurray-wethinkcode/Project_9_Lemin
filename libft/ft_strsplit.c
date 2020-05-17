@@ -41,7 +41,7 @@
 ** ft_strsplit.c ft_strncpy.c ft_strcmp.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 static int		ft_count(char const *s, char c)
 {

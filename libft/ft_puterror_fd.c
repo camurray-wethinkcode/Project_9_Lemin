@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 /*
 ** Outputs the string msg to the file descriptor fd, followed by an exit of the

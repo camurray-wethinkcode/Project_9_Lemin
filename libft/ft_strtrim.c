@@ -19,7 +19,7 @@
 ** ft_strtrim.c ft_strlen.c ft_strsub.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strtrim(char const *s)
 {

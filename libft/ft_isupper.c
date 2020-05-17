@@ -20,7 +20,7 @@
 ** ft_isupper.c ft_putstr.c ft_putchar.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_isupper(int c)
 {

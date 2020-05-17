@@ -18,7 +18,7 @@
 ** ft_lstdelone.c ft_memdel.c ft_memcpy.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {

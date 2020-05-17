@@ -18,7 +18,7 @@
 ** ft_putnbr.c ft_putchar.c ft_putstr.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_putnbr(int n)
 {

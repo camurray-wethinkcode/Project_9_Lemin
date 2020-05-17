@@ -18,7 +18,7 @@
 ** ft_putchar.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_putchar(char c)
 {

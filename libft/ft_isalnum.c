@@ -23,7 +23,7 @@
 ** ft_isalnum.c ft_strlen.c ft_putstr.c ft_islower.c ft_isupper.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_isalnum(int c)
 {

@@ -18,7 +18,7 @@
 ** ft_strcpy.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strcpy(char *dst, const char *src)
 {

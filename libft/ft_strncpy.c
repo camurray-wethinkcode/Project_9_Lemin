@@ -22,7 +22,7 @@
 ** ft_strncpy.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {

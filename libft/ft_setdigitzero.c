@@ -21,7 +21,7 @@
 ** ft_setdigitzero.c ft_strlen.c ft_putstr.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_setdigitzero(int c)
 {

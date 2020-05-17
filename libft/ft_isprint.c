@@ -21,7 +21,7 @@
 ** ft_isprint.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_isprint(int c)
 {

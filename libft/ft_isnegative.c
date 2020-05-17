@@ -20,7 +20,7 @@
 ** ft_isnegative.c ft_putstr.c ft_putchar.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_isnegative(int n)
 {

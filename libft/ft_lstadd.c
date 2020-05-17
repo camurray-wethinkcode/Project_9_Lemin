@@ -18,7 +18,7 @@
 ** ft_lstadd.c ft_lstnew.c ft_memalloc.c ft_memcpy.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {

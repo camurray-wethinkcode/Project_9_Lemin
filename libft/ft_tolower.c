@@ -19,7 +19,7 @@
 ** ft_tolower.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_tolower(int c)
 {

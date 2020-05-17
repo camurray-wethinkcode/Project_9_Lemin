@@ -16,7 +16,7 @@
 ** file desciptor instead of to the standard output.
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_putendl_fd(char const *s, int fd)
 {

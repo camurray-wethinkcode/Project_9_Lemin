@@ -21,7 +21,7 @@
 ** ft_swap.c ft_putstr.c ft_putchar.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_swap(int *a, int *b)
 {

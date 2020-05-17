@@ -19,7 +19,7 @@
 ** ft_putendl.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_putendl(char const *s)
 {

@@ -22,7 +22,7 @@
 ** ft_strequ.c ft_strlen.c ft_strcmp.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int		ft_strequ(char const *s1, char const *s2)
 {

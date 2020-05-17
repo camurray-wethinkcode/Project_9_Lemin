@@ -21,7 +21,7 @@
 ** ft_isascii.c ft_putstr.c ft_strlen.c
 */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_isascii(int c)
 {
