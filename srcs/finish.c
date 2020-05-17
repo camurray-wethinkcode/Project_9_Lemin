@@ -50,8 +50,7 @@ void		bonus(t_lemin *lemin, t_ant *ant, t_room *room)
 	ft_mini_printf("Ant  number   : %d\n", ant->number, 93);
 	ft_mini_printf("Room name : %d\n", room->flag, 91);
 	ft_mini_printf("Room flag : %d\n", room->flag, 91);
-	ft_mini_printf("L%d-%s \n", ant->number, 93, \
-					ant->room->name, 91);
+	ft_mini_printf("L%d-%s \n", ant->number, 93, ant->room->name, 91);
 	lemin->arg.bonus += 1;
 	return;
 }

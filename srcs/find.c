@@ -29,31 +29,17 @@ int			find_room(void *room, int flag)
 	try = now->paths;
 	while (try)
 	{
-		if ((lastpath = find_room(try->content, flag)) < quickest
-														&& lastpath != -1)
-			quickest = lastpath + 1;
+		if ((lastpath = find_room(try->content, flag)) < quickest)
+                  quickest = lastpath + 1;
 		try = try->next;
 	}
 	now->occupied = 0;
 	return(quickest == FT_INT_MAX ? -1 : quickest);
 }
 
-static void	output_help(char *instruction)
+static void	error(char *arg)
 {
-	ft_mini_printf("%s < test.map\n", instruction, 36);
-	ft_mini_printf("Input arguments: \n");
-	ft_mini_printf("    -a | --ant    -> colour the ants\n");
-	ft_mini_printf("    -p | --path   -> colour the paths\n");
-	ft_mini_printf("    -r | --room   -> colour the rooms\n");
-	ft_mini_printf("    -d | --debug  -> bonus\n");
-	exit(0);
-	return;
-}
-
-static void	error(char *arg, char *instruction)
-{
-	ft_mini_printf("Argument %s invalid\n", arg);
-	ft_mini_printf("Run %s -h or --help for help\n", instruction);
+	ft_mini_printf("Argument invalid\n", arg);
 	exit(-2);
 	return;
 }
@@ -65,9 +51,7 @@ void		arg(int argc, char *argv[], t_lemin *init)
 	i = 1;
 	while (--argc)
 	{
-		if (ft_strequ(argv[i], "-h") || ft_strequ(argv[i], "--help"))
-			output_help(argv[0]);
-		else if (ft_strequ(argv[i], "-d") || ft_strequ(argv[i], "--debug"))
+		if (ft_strequ(argv[i], "-d") || ft_strequ(argv[i], "--debug"))
 			init->arg.bonus = TRUE;
 		else if (ft_strequ(argv[i], "-a") || ft_strequ(argv[i], "--ant"))
 			init->arg.ant_wc = TRUE;
@@ -76,7 +60,7 @@ void		arg(int argc, char *argv[], t_lemin *init)
 		else if (ft_strequ(argv[i], "-r") || ft_strequ(argv[i], "--room"))
 			init->arg.room_wc = TRUE;
 		else
-			error(argv[i], argv[0]);
+			error(argv[i]);
 		i++;
 	}
 	return;
