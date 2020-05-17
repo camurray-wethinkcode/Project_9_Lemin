@@ -14,39 +14,39 @@
 
 static void	set_values(t_lemin *init)
 {
-	if ((init->ant_total = total()) == FALSE)
+	if ((init->total = total()) == FALSE)
 		ft_puterror_fd("Error: Invalid number of ants.", -1, 2);
 	if (input(init) == -1)
 		ft_puterror_fd("Error: Reading failed.", -1, 2);
 	if (!init->room_list || !init->path_list)
 		ft_puterror_fd("Error: Missing rooms or paths.", -1, 2);
-	init->ant_list = start_ants(init->ant_total, init->room_list);
+	init->ant_list = start_ants(init->total, init->room_list);
 }
 
-t_lemin		*structure(int total_params, char *params[])
+t_lemin		*structure(int total_arg, char *arg[])
 {
 	t_lemin	*init;
 
 	if (!(init = (t_lemin *)malloc(sizeof(t_lemin))))
-		ft_puterror_fd("Memory allocation failed.", -3, 2);
+		ft_puterror_fd("Malloc failed.", -3, 2);
 	init->moves = 0;
 	init->room_list = NULL;
 	init->path_list = NULL;
-	init->param.debug = FALSE;
-	init->param.ant_colored = FALSE;
-	init->param.path_colored = FALSE;
-	init->param.room_colored = FALSE;
-	arg(total_params, params, init);
+	init->arg.bonus = FALSE;
+	init->arg.ant_wc = FALSE;
+	init->arg.path_wc = FALSE;
+	init->arg.room_wc = FALSE;
+	arg(total_arg, arg, init);
 	set_values(init);
 	return(init);
 }
 
 static void	output_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 {
-	if (lemin->param.debug == FALSE)
+	if (lemin->arg.bonus == FALSE)
 	{
 		ft_putchar_fd('L', 1);
-		ft_putnbr_fd(ant->id, 1);
+		ft_putnbr_fd(ant->number, 1);
 		ft_putchar_fd('-', 1);
 		ft_putstr_fd(ant->room->name, 1);
 		ft_putchar_fd(' ', 1);
@@ -58,10 +58,10 @@ static void	output_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 
 static void	move_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 {
-	ant->room->has_ant = 0;
+	ant->room->filled = 0;
 	ant->last = ant->room;
 	ant->room = room;
-	ant->room->has_ant = 1;
+	ant->room->filled = 1;
 	output_ant(lemin, ant, room);
 	lemin->moves += 1;
 	return();
@@ -80,8 +80,7 @@ void		start(t_lemin *lemin)
 	while (ls)
 	{
 		tmp = (t_room *)ls->content;
-		if ((tmp->flag == 3 || !tmp->has_ant) \
-				&& tmp != lemin->ant_list->last)
+		if ((tmp->flag == 3 || !tmp->filled) && tmp != lemin->ant_list->last)
 		{
 			result = find_room(tmp, 3);
 			if (result < distance && result > -1)

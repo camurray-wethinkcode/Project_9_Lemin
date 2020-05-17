@@ -43,16 +43,16 @@ void		bonus(t_lemin *lemin, t_ant *ant, t_room *room)
 	ft_mini_printf("\n\n");
 	while (i < 4)
 	{
-		ft_mini_printf("%s", output_ant[lemin->param.debug % 3][i], 93);
+		ft_mini_printf("%s", output_ant[lemin->arg.bonus % 3][i], 93);
 		i++;
 	}
 	ft_mini_printf("\n");
-	ft_mini_printf("Ant  id   : %d\n", ant->id, 93);
+	ft_mini_printf("Ant  number   : %d\n", ant->number, 93);
 	ft_mini_printf("Room name : %d\n", room->flag, 91);
 	ft_mini_printf("Room flag : %d\n", room->flag, 91);
-	ft_mini_printf("L%d-%s \n", ant->id, 93, \
+	ft_mini_printf("L%d-%s \n", ant->number, 93, \
 					ant->room->name, 91);
-	lemin->param.debug += 1;
+	lemin->arg.bonus += 1;
 	return();
 }
 

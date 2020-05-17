@@ -22,8 +22,7 @@ int			main(int argc, char *argv[])
 	if (lemin_validate(lemin) != TRUE)
 	{
 		end(lemin);
-		ft_puterror_fd("Error: Something went wrong, check your input.", \
-							-1, 2);
+		ft_puterror_fd("Error: Something went wrong, check your input.", -1, 2);
 	}
 	loop(lemin);
 	return(0);
@@ -31,23 +30,22 @@ int			main(int argc, char *argv[])
 
 static int	validate_roomname(t_list *rooms)
 {
-	int		ret;
+	int		ans;
 	t_room	*tmp;
 
-	ret = 0;
+	ans = 0;
 	if (rooms != 0)
 	{
 		while (rooms)
 		{
 			tmp = (t_room *)rooms->content;
-			if (tmp->name[0] == '#' || tmp->name[0] == 'L' \
-				|| ft_strchr(tmp->name, '-') != 0)
-				break ;
+			if (tmp->name[0] == '#' || tmp->name[0] == 'L' || ft_strchr(tmp->name, '-') != 0)
+				break;
 			rooms = rooms->next;
 		}
-		ret = 1;
+		ans = 1;
 	}
-	return(ret && !rooms);
+	return(ans && !rooms);
 }
 
 static int	validate_roomflag(t_list *rooms, t_list *paths)
@@ -80,8 +78,7 @@ static int	validate_path(t_room *rooms, t_list *paths)
 
 int			validate(t_lemin *lemin)
 {
-	return(validate_path(roomflag(1, lemin->room_list), \
-										lemin->path_list) \
+	return(validate_path(roomflag(1, lemin->room_list), lemin->path_list) \
 			&& validate_roomflag(lemin->room_list, lemin->path_list) \
 			&& validate_roomname(lemin->room_list));
 }
@@ -100,7 +97,7 @@ int			total(void)
 			if (get_next_line(0, &line) == -1)
 			{
 				line = NULL;
-				break ;
+				break;
 			}
 		}
 	}

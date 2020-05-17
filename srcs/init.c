@@ -19,12 +19,12 @@ t_ant		*start_ants(int total, t_list *rooms)
 
 	i = 0;
 	if (!(ants = (t_ant *)malloc(sizeof(t_ant) * total)))
-		ft_puterror_fd("Memory allocation failed.", -3, 2);
+		ft_puterror_fd("Malloc failed.", -3, 2);
 	while (i < total)
 	{
-		ants[i].room = get_room_flag(1, rooms);
-		ants[i].did_turn = 0;
-		ants[i].id = i + 1;
+		ants[i].room = roomflag(1, rooms);
+		ants[i].moved = 0;
+		ants[i].number = i + 1;
 		i++;
 	}
 	return(ants);
@@ -36,7 +36,7 @@ t_path		*start_path(char *line)
 	t_path	*newpath;
 
 	if (!(newpath = (t_path *)malloc(sizeof(t_path))))
-		ft_puterror_fd("Memory allocation failed.", -3, 2);
+		ft_puterror_fd("Malloc failed.", -3, 2);
 	i = (int)ft_strlchr(line, '-');
 	newpath->door1 = ft_strsub(line, 0, i);
 	newpath->door2 = ft_strdup(line + i + 1);
@@ -51,7 +51,7 @@ t_room		*start_room(char *line, int flag)
 
 	i = 0;
 	if (!(newroom = (t_room *)malloc(sizeof(t_room))))
-		ft_puterror_fd("Memory allocation failed.", -3, 2);
+		ft_puterror_fd("Malloc failed.", -3, 2);
 	while (line[i] != ' ')
 		i++;
 	newroom->flag = flag;
@@ -66,7 +66,7 @@ t_room		*start_room(char *line, int flag)
 	newroom->y = ft_atoi(line + i);
 	newroom->paths = NULL;
 	newroom->busy = 0;
-	newroom->has_ant = 0;
+	newroom->filled = 0;
 	free(line);
 	return(newroom);
 }

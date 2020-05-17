@@ -23,13 +23,13 @@ static int	test(t_ant *ant)
 		return(0);
 	true = 1;
 	move = 0;
-	if (ant->did_turn)
+	if (ant->moved)
 		true = 0;
 	ls = ant->room->paths;
 	while (true && ls)
 	{
 		tmp = (t_room *)ls->content;
-		if ((!tmp->has_ant && !(tmp->flag == 1) && tmp != ant->last)
+		if ((!tmp->filled && !(tmp->flag == 1) && tmp != ant->last)
 			|| tmp->flag == 3)
 		{
 			move = 1;
@@ -66,7 +66,7 @@ static void	reset(t_ant *ants, int num)
 	i = 0;
 	while (i < num)
 	{
-		ants[i].did_turn = 0;
+		ants[i].moved = 0;
 		i++;
 	}
 	return();
@@ -78,11 +78,11 @@ static void	check(t_lemin *lemin)
 	int		turn;
 
 	turn = 0;
-	while (!turn && !end(lemin->ant_list, lemin->ant_total))
+	while (!turn && !end(lemin->ant_list, lemin->total))
 	{
 		i = 0;
 		turn = 1;
-		while (i < lemin->ant_total)
+		while (i < lemin->total)
 		{
 			if (test(lemin->ant_list + i))
 			{
@@ -100,13 +100,13 @@ static void	check(t_lemin *lemin)
 
 void		loop(t_lemin *lemin)
 {
-	while (!end(lemin->ant_list, lemin->ant_total))
+	while (!end(lemin->ant_list, lemin->total))
 	{
-		reset(lemin->ant_list, lemin->ant_total);
+		reset(lemin->ant_list, lemin->total);
 		check(lemin);
 	}
-	if (lemin->param.debug != FALSE)
-		ft_mini_printf("\nNumber of moves : %d\n", lemin->moves, 92);
+	if (lemin->arg.bonus != FALSE)
+		ft_mini_printf("\nTotal moves : %d\n", lemin->moves, 92);
 	end(lemin);
 	return();
 }

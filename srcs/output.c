@@ -62,28 +62,27 @@ static void	output_room_wc(void *room)
 	return();
 }
 
-static void	output_path_wc(void *tunnel)
+static void	output_path_wc(void *path1)
 {
 	t_path	*path;
 
-	path = (t_path *)tunnel;
-	ft_mini_printf("%s-%s\n", path->door1, 36, \
-					path->door2, 36);
+	path = (t_path *)path1;
+	ft_mini_printf("%s-%s\n", path->door1, 36, path->door2, 36);
 	return();
 }
 
 void		output(t_lemin *lemin)
 {
-	if (lemin->param.ant_colored == FALSE)
-		ft_putnbr_fd(lemin->ant_total, 1);
+	if (lemin->arg.ant_wc == FALSE)
+		ft_putnbr_fd(lemin->total, 1);
 	else
-		ft_mini_printf("%d", lemin->ant_total, 93);
+		ft_mini_printf("%d", lemin->total, 93);
 	ft_putchar_fd('\n', 1);
-	if (lemin->param.room_colored == FALSE)
+	if (lemin->arg.room_wc == FALSE)
 		ft_lstforeach(lemin->room_list, output_room);
 	else
 		ft_lstforeach(lemin->room_list, output_room_wc);
-	if (lemin->param.path_colored == FALSE)
+	if (lemin->arg.path_wc == FALSE)
 		ft_lstforeach(lemin->path_list, output_path);
 	else
 		ft_lstforeach(lemin->path_list, output_path_wc);

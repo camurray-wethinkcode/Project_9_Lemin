@@ -49,33 +49,33 @@ static int	input_rooms(char *line)
 
 static int	input_paths(char *line, t_list *rooms)
 {
-	int		ret;
-	t_path	tmp;
+	int		ans;
+	t_path	test;
 
-	ret = 0;
+	ans = 0;
 	if (ft_strchr(line, '-'))
 	{
-		tmp.door1 = ft_strsub(line, 0, ft_strlchr(line, '-'));
-		tmp.door2 = ft_strdup(line + ft_strlchr(line, '-') + 1);
-		if (roomname(tmp.door1, rooms) && roomname(tmp.door2, rooms))
-			ret = 1;
-		free(tmp.door1);
-		free(tmp.door2);
-		tmp.door1 = NULL;
-		tmp.door2 = NULL;
+		test.door1 = ft_strsub(line, 0, ft_strlchr(line, '-'));
+		test.door2 = ft_strdup(line + ft_strlchr(line, '-') + 1);
+		if (roomname(test.door1, rooms) && roomname(test.door2, rooms))
+			ans = 1;
+		free(test.door1);
+		free(test.door2);
+		test.door1 = NULL;
+		test.door2 = NULL;
 	}
-	return(ret);
+	return(ans);
 }
 
 int			input(t_lemin *lemin)
 {
-	int		ret;
+	int		ans;
 	char	*line;
 	int		flag;
 
 	flag = 1;
 	lemin->rooms_done = 0;
-	while ((ret = get_next_line(0, &line)) > 0)
+	while ((ans = get_next_line(0, &line)) > 0)
 	{
 		if (input_commands(line))
 		{
@@ -83,8 +83,7 @@ int			input(t_lemin *lemin)
 		}
 		else if (input_rooms(line) && !lemin->rooms_done)
 		{
-			lemin->room_list = ft_lstpush(lemin->room_list, \
-											start_room(line, flag));
+			lemin->room_list = ft_lstpush(lemin->room_list, start_room(line, flag));
 			flag = 1;
 		}
 		else if (input_paths(line, lemin->room_list) && (lemin->rooms_done = 1))
@@ -93,7 +92,7 @@ int			input(t_lemin *lemin)
 			break;
 	}
 	ft_memdel((void **)&line);
-	return(ret);
+	return(ans);
 }
 
 void		lemin(t_lemin *lemin)
@@ -112,11 +111,9 @@ void		lemin(t_lemin *lemin)
 		{
 			path = (t_path *)tmp_path->content;
 			if (ft_strequ(path->door1, room->name))
-				room->paths = ft_lstpush(room->paths, \
-						roomname(path->door2, lemin->room_list));
+				room->paths = ft_lstpush(room->paths, roomname(path->door2, lemin->room_list));
 			if (ft_strequ(path->door2, room->name))
-				room->paths = ft_lstpush(room->paths, \
-						roomname(path->door1, lemin->room_list));
+				room->paths = ft_lstpush(room->paths, roomname(path->door1, lemin->room_list));
 			tmp_path = tmp_path->next;
 		}
 		tmp_room = tmp_room->next;
