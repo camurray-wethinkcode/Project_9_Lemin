@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 int			find_room(void *room, int flag)
 {
@@ -47,7 +47,7 @@ static void	output_help(char *instruction)
 	ft_mini_printf("    -r | --room   -> colour the rooms\n");
 	ft_mini_printf("    -d | --debug  -> bonus\n");
 	exit(0);
-	return();
+	return;
 }
 
 static void	error(char *arg, char *instruction)
@@ -55,7 +55,7 @@ static void	error(char *arg, char *instruction)
 	ft_mini_printf("Argument %s invalid\n", arg);
 	ft_mini_printf("Run %s -h or --help for help\n", instruction);
 	exit(-2);
-	return();
+	return;
 }
 
 void		arg(int argc, char *argv[], t_lemin *init)
@@ -79,5 +79,5 @@ void		arg(int argc, char *argv[], t_lemin *init)
 			error(argv[i], argv[0]);
 		i++;
 	}
-	return();
+	return;
 }

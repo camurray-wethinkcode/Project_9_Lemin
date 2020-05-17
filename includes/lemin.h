@@ -1,7 +1,8 @@
 #ifndef LEMIN_H
 # define LEMIN_H
-# include "libft.h"
-# define SET_FLAG(line)	read_command(line);ft_memdel((void **)&line)
+# define FT_INT_MAX			(2147483647)
+# include "../libft/include/libft.h"
+# define SET_FLAG(line)	input_commands(line);ft_memdel((void **)&line)
 
 typedef struct			s_path
 {

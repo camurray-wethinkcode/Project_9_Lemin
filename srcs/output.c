@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 static void	output_room(void *room)
 {
@@ -30,7 +30,7 @@ static void	output_room(void *room)
 		ft_putnbr_fd(tmp_room->y, 1);
 	}
 	ft_putchar_fd('\n', 1);
-	return();
+	return;
 }
 
 static void	output_path(void *tunnel)
@@ -41,7 +41,7 @@ static void	output_path(void *tunnel)
 	ft_putstr_fd(path->door1, 1);
 	ft_putchar_fd('-', 1);
 	ft_putendl_fd(path->door2, 1);
-	return();
+	return;
 }
 
 static void	output_room_wc(void *room)
@@ -55,11 +55,10 @@ static void	output_room_wc(void *room)
 			ft_putendl_fd("##start", 1);
 		else if (tmp->flag == 3)
 			ft_putendl_fd("##end", 1);
-		ft_mini_printf("%s %d %d", tmp->name, 91, \
-						tmp->x, 92, tmp->y, 92);
+		ft_mini_printf("%s %d %d", tmp->name, 91, tmp->x, 92, tmp->y, 92);
 	}
 	ft_putchar_fd('\n', 1);
-	return();
+	return;
 }
 
 static void	output_path_wc(void *path1)
@@ -68,7 +67,7 @@ static void	output_path_wc(void *path1)
 
 	path = (t_path *)path1;
 	ft_mini_printf("%s-%s\n", path->door1, 36, path->door2, 36);
-	return();
+	return;
 }
 
 void		output(t_lemin *lemin)
@@ -87,5 +86,5 @@ void		output(t_lemin *lemin)
 	else
 		ft_lstforeach(lemin->path_list, output_path_wc);
 	ft_putchar_fd('\n', 1);
-	return();
+	return;
 }

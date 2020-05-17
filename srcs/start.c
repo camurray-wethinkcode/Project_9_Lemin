@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 static int	input_commands(char *line)
 {
-	int		ret;
+	int		ans;
 
-	ret = 1;
+	ans = 1;
 	if (line[0] != '#')
-		ret = 0;
+		ans = 0;
 	else if (ft_strequ("##start", line))
-		ret = 1;
+		ans = 1;
 	else if (ft_strequ("##end", line))
-		ret = 3;
-	return(ret);
+		ans = 3;
+	return(ans);
 }
 
 static int	input_rooms(char *line)
@@ -74,19 +74,19 @@ int			input(t_lemin *lemin)
 	int		flag;
 
 	flag = 1;
-	lemin->rooms_done = 0;
+	lemin->done = 0;
 	while ((ans = get_next_line(0, &line)) > 0)
 	{
 		if (input_commands(line))
 		{
 			flag = (flag != 1) ? flag : SET_FLAG(line);
 		}
-		else if (input_rooms(line) && !lemin->rooms_done)
+		else if (input_rooms(line) && !lemin->done)
 		{
 			lemin->room_list = ft_lstpush(lemin->room_list, start_room(line, flag));
 			flag = 1;
 		}
-		else if (input_paths(line, lemin->room_list) && (lemin->rooms_done = 1))
+		else if (input_paths(line, lemin->room_list) && (lemin->done = 1))
 			lemin->path_list = ft_lstpush(lemin->path_list, start_path(line));
 		else
 			break;
@@ -118,5 +118,5 @@ void		lemin(t_lemin *lemin)
 		}
 		tmp_room = tmp_room->next;
 	}
-	return();
+	return;
 }

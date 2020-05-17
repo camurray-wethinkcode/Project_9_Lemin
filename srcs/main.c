@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 int			main(int argc, char *argv[])
 {
-	t_lemin	*lemin;
+	t_lemin	*tlem;
 
-	lemin = structure(argc, argv);
-	output(lemin);
-	lemin(lemin);
-	if (lemin_validate(lemin) != TRUE)
+	tlem = structure(argc, argv);
+	output(tlem);
+	lemin(tlem);
+	if (validate(tlem) != TRUE)
 	{
-		end(lemin);
+		end(tlem);
 		ft_puterror_fd("Error: Something went wrong, check your input.", -1, 2);
 	}
-	loop(lemin);
+	loop(tlem);
 	return(0);
 }
 

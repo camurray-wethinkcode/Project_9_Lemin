@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 static int	test(t_ant *ant)
 {
@@ -40,7 +40,7 @@ static int	test(t_ant *ant)
 	return(true && move);
 }
 
-static int	end(t_ant *ants, int num)
+static int	finish(t_ant *ants, int num)
 {
 	int		i;
 	int		total;
@@ -69,7 +69,7 @@ static void	reset(t_ant *ants, int num)
 		ants[i].moved = 0;
 		i++;
 	}
-	return();
+	return;
 }
 
 static void	check(t_lemin *lemin)
@@ -78,7 +78,7 @@ static void	check(t_lemin *lemin)
 	int		turn;
 
 	turn = 0;
-	while (!turn && !end(lemin->ant_list, lemin->total))
+	while (!turn && !finish(lemin->ant_list, lemin->total))
 	{
 		i = 0;
 		turn = 1;
@@ -95,12 +95,12 @@ static void	check(t_lemin *lemin)
 		}
 		ft_putchar_fd('\n', 1);
 	}
-	return();
+	return;
 }
 
 void		loop(t_lemin *lemin)
 {
-	while (!end(lemin->ant_list, lemin->total))
+	while (!finish(lemin->ant_list, lemin->total))
 	{
 		reset(lemin->ant_list, lemin->total);
 		check(lemin);
@@ -108,5 +108,5 @@ void		loop(t_lemin *lemin)
 	if (lemin->arg.bonus != FALSE)
 		ft_mini_printf("\nTotal moves : %d\n", lemin->moves, 92);
 	end(lemin);
-	return();
+	return;
 }

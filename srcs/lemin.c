@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 static void	set_values(t_lemin *init)
 {
@@ -23,7 +23,7 @@ static void	set_values(t_lemin *init)
 	init->ant_list = start_ants(init->total, init->room_list);
 }
 
-t_lemin		*structure(int total_arg, char *arg[])
+t_lemin		*structure(int total_arg, char *argm[])
 {
 	t_lemin	*init;
 
@@ -36,12 +36,12 @@ t_lemin		*structure(int total_arg, char *arg[])
 	init->arg.ant_wc = FALSE;
 	init->arg.path_wc = FALSE;
 	init->arg.room_wc = FALSE;
-	arg(total_arg, arg, init);
+	arg(total_arg, argm, init);
 	set_values(init);
 	return(init);
 }
 
-static void	output_ant(t_lemin *lemin, t_ant *ant, t_room *room)
+static void	print_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 {
 	if (lemin->arg.bonus == FALSE)
 	{
@@ -53,7 +53,7 @@ static void	output_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 	}
 	else
 		bonus(lemin, lemin->ant_list, room);
-	return();
+	return;
 }
 
 static void	move_ant(t_lemin *lemin, t_ant *ant, t_room *room)
@@ -62,9 +62,9 @@ static void	move_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 	ant->last = ant->room;
 	ant->room = room;
 	ant->room->filled = 1;
-	output_ant(lemin, ant, room);
+	print_ant(lemin, ant, room);
 	lemin->moves += 1;
-	return();
+	return;
 }
 
 void		start(t_lemin *lemin)

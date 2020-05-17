@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "../includes/lemin.h"
 
 char const	print_ant[3][4][47] =
 {
@@ -43,7 +43,7 @@ void		bonus(t_lemin *lemin, t_ant *ant, t_room *room)
 	ft_mini_printf("\n\n");
 	while (i < 4)
 	{
-		ft_mini_printf("%s", output_ant[lemin->arg.bonus % 3][i], 93);
+		ft_mini_printf("%s", print_ant[lemin->arg.bonus % 3][i], 93);
 		i++;
 	}
 	ft_mini_printf("\n");
@@ -53,7 +53,7 @@ void		bonus(t_lemin *lemin, t_ant *ant, t_room *room)
 	ft_mini_printf("L%d-%s \n", ant->number, 93, \
 					ant->room->name, 91);
 	lemin->arg.bonus += 1;
-	return();
+	return;
 }
 
 static void	delete_room(void *data)
@@ -65,7 +65,7 @@ static void	delete_room(void *data)
 	ft_lst_rec_free(room->paths);
 	free(data);
 	data = NULL;
-	return();
+	return;
 }
 
 static void	delete_path(void *data)
@@ -77,7 +77,7 @@ static void	delete_path(void *data)
 	ft_strdel(&path->door2);
 	free(data);
 	data = NULL;
-	return();
+	return;
 }
 
 void		end(t_lemin *lemin)
@@ -98,5 +98,5 @@ void		end(t_lemin *lemin)
 			ft_memdel((void **)&lemin->ant_list);
 		ft_memdel((void **)&lemin);
 	}
-	return();
+	return;
 }
