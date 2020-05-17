@@ -12,49 +12,6 @@
 
 #include "../includes/lemin.h"
 
-char const	print_ant[3][4][47] =
-{
-	{
-		{"   \\_//   \n"},
-		{"   ..0..   \n"},
-		{"     0     \n"},
-		{"   ..0..   \n"},
-	},
-	{
-		{"     \\_// \n"},
-		{"     ..0.. \n"},
-		{"      0    \n"},
-		{"   ..0..   \n"},
-	},
-	{
-		{" \\_//     \n"},
-		{" ..0..     \n"},
-		{"    0      \n"},
-		{"   ..0..   \n"},
-	}
-};
-
-void		bonus(t_lemin *lemin, t_ant *ant, t_room *room)
-{
-	int		i;
-
-	i = 0;
-	usleep(420000);
-	ft_mini_printf("\n\n");
-	while (i < 4)
-	{
-		ft_mini_printf("%s", print_ant[lemin->arg.bonus % 3][i], 93);
-		i++;
-	}
-	ft_mini_printf("\n");
-	ft_mini_printf("Ant  number   : %d\n", ant->number, 93);
-	ft_mini_printf("Room name : %d\n", room->flag, 91);
-	ft_mini_printf("Room flag : %d\n", room->flag, 91);
-	ft_mini_printf("L%d-%s \n", ant->number, 93, ant->room->name, 91);
-	lemin->arg.bonus += 1;
-	return;
-}
-
 static void	delete_room(void *data)
 {
 	t_room	*room;

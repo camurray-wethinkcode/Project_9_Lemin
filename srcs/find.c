@@ -51,9 +51,7 @@ void		arg(int argc, char *argv[], t_lemin *init)
 	i = 1;
 	while (--argc)
 	{
-		if (ft_strequ(argv[i], "-d") || ft_strequ(argv[i], "--debug"))
-			init->arg.bonus = TRUE;
-		else if (ft_strequ(argv[i], "-a") || ft_strequ(argv[i], "--ant"))
+		if (ft_strequ(argv[i], "-a") || ft_strequ(argv[i], "--ant"))
 			init->arg.ant_wc = TRUE;
 		else if (ft_strequ(argv[i], "-p") || ft_strequ(argv[i], "--path"))
 			init->arg.path_wc = TRUE;

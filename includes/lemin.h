@@ -31,7 +31,6 @@ typedef struct			s_ant
 
 typedef struct			s_arg
 {
-	int			bonus;
 	int			ant_wc;
 	int			path_wc;
 	int			room_wc;
@@ -63,7 +62,6 @@ int			input(t_lemin *lemin);
 void		lemin(t_lemin *lemin);
 int			find_room(void *room, int flag);
 void		arg(int argc, char *argv[], t_lemin *init);
-void		bonus(t_lemin *lemin, t_ant *ant, t_room *room);
 void		end(t_lemin *lemin);
 
 #endif

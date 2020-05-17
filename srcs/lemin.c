@@ -32,7 +32,6 @@ t_lemin		*structure(int total_arg, char *argm[])
 	init->moves = 0;
 	init->room_list = NULL;
 	init->path_list = NULL;
-	init->arg.bonus = FALSE;
 	init->arg.ant_wc = FALSE;
 	init->arg.path_wc = FALSE;
 	init->arg.room_wc = FALSE;
@@ -41,28 +40,12 @@ t_lemin		*structure(int total_arg, char *argm[])
 	return(init);
 }
 
-static void	print_ant(t_lemin *lemin, t_ant *ant, t_room *room)
-{
-	if (lemin->arg.bonus == FALSE)
-	{
-		ft_putchar_fd('L', 1);
-		ft_putnbr_fd(ant->number, 1);
-		ft_putchar_fd('-', 1);
-		ft_putstr_fd(ant->room->name, 1);
-		ft_putchar_fd(' ', 1);
-	}
-	else
-		bonus(lemin, lemin->ant_list, room);
-	return;
-}
-
 static void	move_ant(t_lemin *lemin, t_ant *ant, t_room *room)
 {
 	ant->room->filled = 0;
 	ant->last = ant->room;
 	ant->room = room;
 	ant->room->filled = 1;
-	print_ant(lemin, ant, room);
 	lemin->moves += 1;
 	return;
 }

@@ -105,8 +105,7 @@ void		loop(t_lemin *lemin)
 		reset(lemin->ant_list, lemin->total);
 		check(lemin);
 	}
-	if (lemin->arg.bonus != FALSE)
-		ft_mini_printf("\nTotal moves : %d\n", lemin->moves, 92);
+        ft_mini_printf("\nTotal moves : %d\n", lemin->moves, 92);
 	end(lemin);
 	return;
 }
