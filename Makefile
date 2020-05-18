@@ -24,7 +24,6 @@ $(LIBFT):
 
 $(NAME): $(OBJ)
 	gcc $(OBJ) $(LNK) -lm -o $(NAME)
-#	gcc $(OBJ) $(LNK) -lm -fsanitize=address -o $(NAME)
 
 clean:
 	rm -Rf $(OBJ_DIR)
