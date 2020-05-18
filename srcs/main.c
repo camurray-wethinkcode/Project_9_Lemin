@@ -14,94 +14,99 @@
 
 int			main(int argc, char *argv[])
 {
-	t_lemin	*tlem;
+	t_lemin	*input;
 
-	tlem = structure(argc, argv);
-	output(tlem);
-	lemin(tlem);
-	if (validate(tlem) != TRUE)
+	input = lemin(argc, argv);
+	output(input);
+	start(input);
+	if (validate(input) != TRUE)
 	{
-		end(tlem);
+		end(input);
 		ft_puterror_fd("Error: Something went wrong, check your input.", -1, 2);
 	}
-	loop(tlem);
+	loop(input);
 	return(0);
 }
 
-static int	validate_roomname(t_list *rooms)
+static int	commandinput(char *input)
 {
 	int		ans;
-	t_room	*tmp;
+
+	ans = 2;
+	if (input[0] != '#')
+		ans = 0;
+	else if (ft_strequ("##start", input))
+		ans = 1;
+	else if (ft_strequ("##end", input))
+		ans = 3;
+	return (ans);
+}
+
+static int	roominput(char *input)
+{
+	while (*input && *input != ' ')
+		input++;
+	if (*input != ' ')
+		return(0);
+	input++;
+	if (*input == '-')
+		input++;
+	while (*input && ft_isdigit(*input))
+		input++;
+	if (*input != ' ')
+		return(0);
+	input++;
+	if (*input == '-')
+		input++;
+	while (*input && ft_isdigit(*input))
+		input++;
+	return (*input != '\0' ? 0 : 1);
+}
+
+static int	pathinput(char *input, t_list *room)
+{
+	int		ans;
+	t_path	test;
 
 	ans = 0;
-	if (rooms != 0)
+	if (ft_strchr(input, '-'))
 	{
-		while (rooms)
-		{
-			tmp = (t_room *)rooms->content;
-			if (tmp->name[0] == '#' || tmp->name[0] == 'L' || ft_strchr(tmp->name, '-') != 0)
-				break;
-			rooms = rooms->next;
-		}
-		ans = 1;
+		test.door1 = ft_strsub(input, 0, ft_strlchr(input, '-'));
+		test.door2 = ft_strdup(input + ft_strlchr(input, '-') + 1);
+		if (roomname(test.door1, room) && roomname(test.door2, room))
+			ans = 1;
+		free(test.door1);
+		free(test.door2);
+		test.door1 = NULL;
+		test.door2 = NULL;
 	}
-	return(ans && !rooms);
+	return (ans);
 }
 
-static int	validate_roomflag(t_list *rooms, t_list *paths)
+int			info(t_lemin *input)
 {
-	int		start;
-	int		end;
-	t_room	*tmp;
+	int		ans;
+	char	*next;
+	int		flag;
 
-	start = 0;
-	end = 0;
-	if (rooms != 0 || paths != 0)
+	flag = 2;
+	input->done = 0;
+	while ((ans = get_next_line(0, &next)) > 0)
 	{
-		while (rooms)
+		if (commandinput(next))
 		{
-			tmp = (t_room *)rooms->content;
-			if (tmp->flag == 1)
-				start++;
-			if (tmp->flag == 3)
-				end++;
-			rooms = rooms->next;
+			flag = (flag != 2) ? flag : SET_FLAG(next);
 		}
-	}
-	return(start == 1 && end == 1);
-}
-
-static int	validate_path(t_room *rooms, t_list *paths)
-{
-	return((rooms != 0 && paths != 0) && find_room(rooms, 3) >= 0);
-}
-
-int			validate(t_lemin *lemin)
-{
-	return(validate_path(roomflag(1, lemin->room_list), lemin->path_list) \
-			&& validate_roomflag(lemin->room_list, lemin->path_list) \
-			&& validate_roomname(lemin->room_list));
-}
-
-int			total(void)
-{
-	char	*line;
-	int		ant_number;
-
-	line = NULL;
-	if (get_next_line(0, &line) > 0)
-	{
-		while (line[0] == '#')
+		else if (roominput(next) && !input->done)
 		{
-			ft_memdel((void **)&line);
-			if (get_next_line(0, &line) == -1)
-			{
-				line = NULL;
-				break;
-			}
+			input->room_list = ft_lstpush(input->room_list, startroom(next, flag));
+			flag = 2;
 		}
+		else if (pathinput(next, input->room_list) && (input->done = 1))
+			input->path_list = ft_lstpush(input->path_list, startpath(next));
+		else
+			break;
 	}
-	ant_number = (line != NULL && *line != '\0') ? atoi(line) : 0;
-	ft_memdel((void **)&line);
-	return(ant_number);
+	ft_memdel((void **)&next);
+	return(ans);
 }

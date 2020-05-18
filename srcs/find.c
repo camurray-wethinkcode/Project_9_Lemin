@@ -12,54 +12,85 @@
 
 #include "../includes/lemin.h"
 
-int			find_room(void *room, int flag)
+int			froom(void *room, int flag)
 {
 	t_room	*now;
 	t_list	*try;
 	int		quickest;
-	int		lastpath;
+	int		path;
 
 	now = (t_room *)room;
 	if (now->flag == flag)
-		return(0);
+		return (0);
 	if (now->occupied)
-		return(-1);
-	quickest = FT_INT_MAX;
+		return (-1);
 	now->occupied = 1;
+	quickest = 2147483647;
 	try = now->paths;
 	while (try)
 	{
-		if ((lastpath = find_room(try->content, flag)) < quickest)
-                  quickest = lastpath + 1;
+		if ((path = froom(try->content, flag)) < quickest && path != -1)
+			quickest = 1 + path;
 		try = try->next;
 	}
 	now->occupied = 0;
-	return(quickest == FT_INT_MAX ? -1 : quickest);
+	return (quickest == 2147483647 ? -1 : quickest);
+}
+
+int			total(void)
+{
+	char	*input;
+	int		ant;
+
+	input = NULL;
+	if (get_next_line(0, &input) > 0)
+	{
+		while (input[0] == '#')
+		{
+			ft_memdel((void **)&input);
+			if (get_next_line(0, &input) == -1)
+			{
+				input = NULL;
+				break;
+			}
+		}
+	}
+	ant = (input != NULL && *input != '\0') ? atoi(input) : 0;
+	ft_memdel((void **)&input);
+	return (ant);
 }
 
 static void	error(char *arg)
 {
-	ft_mini_printf("Argument invalid\n", arg);
+	ft_mini_printf("Argument %s is invalid!\n", arg);
 	exit(-2);
 	return;
 }
 
-void		arg(int argc, char *argv[], t_lemin *init)
+void		input(int argc, char *argv[])
 {
 	int		i;
 
 	i = 1;
 	while (--argc)
 	{
-		if (ft_strequ(argv[i], "-a") || ft_strequ(argv[i], "--ant"))
-			init->arg.ant_wc = TRUE;
-		else if (ft_strequ(argv[i], "-p") || ft_strequ(argv[i], "--path"))
-			init->arg.path_wc = TRUE;
-		else if (ft_strequ(argv[i], "-r") || ft_strequ(argv[i], "--room"))
-			init->arg.room_wc = TRUE;
-		else
-			error(argv[i]);
+		error(argv[i]);
 		i++;
 	}
 	return;
+}
+
+t_room		*roomflag(int flag, t_list *list)
+{
+	int		i;
+	t_room	*test;
+
+	i = 0;
+	while (list && !i)
+	{
+		test = (t_room *)list->content;
+		i = test->flag == flag ? 1 : 0;
+		list = list->next;
+	}
+	return (i ? test : NULL);
 }

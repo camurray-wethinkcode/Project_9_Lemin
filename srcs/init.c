@@ -12,7 +12,22 @@
 
 #include "../includes/lemin.h"
 
-t_ant		*start_ants(int total, t_list *rooms)
+t_room		*roomname(char *name, t_list *list)
+{
+	int		i;
+	t_room	*test;
+
+	i = 0;
+	while (list && !i)
+	{
+		test = (t_room *)list->content;
+		i = ft_strequ(name, test->name);
+		list = list->next;
+	}
+	return (i ? test : NULL);
+}
+
+t_ant		*startants(int total, t_list *rooms)
 {
 	int		i;
 	t_ant	*ants;
@@ -30,73 +45,48 @@ t_ant		*start_ants(int total, t_list *rooms)
 	return(ants);
 }
 
-t_path		*start_path(char *line)
+t_path		*startpath(char *input)
 {
 	int		i;
-	t_path	*newpath;
+	t_path	*path;
 
-	if (!(newpath = (t_path *)malloc(sizeof(t_path))))
+	if (!(path = (t_path *)malloc(sizeof(t_path))))
 		ft_puterror_fd("Malloc failed.", -3, 2);
-	i = (int)ft_strlchr(line, '-');
-	newpath->door1 = ft_strsub(line, 0, i);
-	newpath->door2 = ft_strdup(line + i + 1);
-	free(line);
-	return(newpath);
+	i = (int)ft_strlchr(input, '-');
+	path->door1 = ft_strsub(input, 0, i);
+	path->door2 = ft_strdup(input + i + 1);
+	free(input);
+	return(path);
 }
 
-t_room		*start_room(char *line, int flag)
+t_room		*startroom(char *input, int flag)
 {
 	int		i;
-	t_room	*newroom;
+	t_room	*room;
 
 	i = 0;
-	if (!(newroom = (t_room *)malloc(sizeof(t_room))))
+	if (!(room = (t_room *)malloc(sizeof(t_room))))
 		ft_puterror_fd("Malloc failed.", -3, 2);
-	while (line[i] != ' ')
+	while (input[i] != ' ')
 		i++;
-	newroom->flag = flag;
-	newroom->name = ft_strsub(line, 0, i);
-	while (line[i] == ' ')
+	room->flag = flag;
+	room->name = ft_strsub(input, 0, i);
+	while (input[i] == ' ')
 		i++;
-	newroom->x = ft_atoi(line + i);
-	while (line[i] != ' ')
+	room->x = ft_atoi(input + i);
+	while (input[i] != ' ')
 		i++;
-	while (line[i] == ' ')
+	while (input[i] == ' ')
 		i++;
-	newroom->y = ft_atoi(line + i);
-	newroom->paths = NULL;
-	newroom->occupied = 0;
-	newroom->filled = 0;
-	free(line);
-	return(newroom);
+	room->y = ft_atoi(input + i);
+	room->paths = NULL;
+	room->occupied = 0;
+	room->filled = 0;
+	free(input);
+	return(room);
 }
 
-t_room		*roomflag(int flag, t_list *list)
+int	pathvalidation(t_room *rooms, t_list *paths)
 {
-	int		done;
-	t_room	*tmp;
-
-	done = 0;
-	while (list && !done)
-	{
-		tmp = (t_room *)list->content;
-		done = tmp->flag == flag ? 1 : 0;
-		list = list->next;
-	}
-	return(done ? tmp : NULL);
-}
-
-t_room		*roomname(char *name, t_list *list)
-{
-	int		done;
-	t_room	*tmp;
-
-	done = 0;
-	while (list && !done)
-	{
-		tmp = (t_room *)list->content;
-		done = ft_strequ(name, tmp->name);
-		list = list->next;
-	}
-	return(done ? tmp : NULL);
+	return((rooms != 0 && paths != 0) && froom(rooms, 3) >= 0);
 }

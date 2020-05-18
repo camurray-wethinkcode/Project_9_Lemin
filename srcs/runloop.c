@@ -12,51 +12,50 @@
 
 #include "../includes/lemin.h"
 
-static int	test(t_ant *ant)
+static int	move(t_ant *ant)
 {
-	int		true;
+	int		i;
 	int		move;
-	t_list	*ls;
-	t_room	*tmp;
+	t_list	*list;
+	t_room	*test;
 
 	if (ant->room->flag == 3)
 		return(0);
-	true = 1;
+	i = 1;
 	move = 0;
 	if (ant->moved)
-		true = 0;
-	ls = ant->room->paths;
-	while (true && ls)
+		i = 0;
+	list = ant->room->paths;
+	while (i && list)
 	{
-		tmp = (t_room *)ls->content;
-		if ((!tmp->filled && !(tmp->flag == 1) && tmp != ant->last)
-			|| tmp->flag == 3)
+		test = (t_room *)list->content;
+		if ((!test->filled && !(test->flag == 1) && test != ant->last) || test->flag == 3)
 		{
 			move = 1;
 			break;
 		}
-		ls = ls->next;
+		list = list->next;
 	}
-	return(true && move);
+	return(i && move);
 }
 
-static int	finish(t_ant *ants, int num)
+static int	quit(t_ant *ants, int num)
 {
 	int		i;
-	int		total;
+	int		ans;
 
 	i = 0;
-	total = 1;
+	ans = 1;
 	while (i < num && ants != 0)
 	{
 		if (ants[i].room->flag != 3)
 		{
-			total = 0;
+			ans = 0;
 			break;
 		}
 		i++;
 	}
-	return(total);
+	return(ans);
 }
 
 static void	reset(t_ant *ants, int num)
@@ -72,24 +71,24 @@ static void	reset(t_ant *ants, int num)
 	return;
 }
 
-static void	check(t_lemin *lemin)
+static void	attempt(t_lemin *input)
 {
 	int		i;
 	int		turn;
 
 	turn = 0;
-	while (!turn && !finish(lemin->ant_list, lemin->total))
+	while (!turn && !quit(input->ant_list, input->total))
 	{
 		i = 0;
 		turn = 1;
-		while (i < lemin->total)
+		while (i < input->total)
 		{
-			if (test(lemin->ant_list + i))
+			if (move(input->ant_list + i))
 			{
 				turn = 0;
-				lemin->ant_list += i;
-				start(lemin);
-				lemin->ant_list -= i;
+				input->ant_list += i;
+				run(input);
+				input->ant_list -= i;
 			}
 			i++;
 		}
@@ -98,14 +97,14 @@ static void	check(t_lemin *lemin)
 	return;
 }
 
-void		loop(t_lemin *lemin)
+void		loop(t_lemin *input)
 {
-	while (!finish(lemin->ant_list, lemin->total))
+	while (!quit(input->ant_list, input->total))
 	{
-		reset(lemin->ant_list, lemin->total);
-		check(lemin);
+		reset(input->ant_list, input->total);
+		attempt(input);
 	}
-        ft_mini_printf("\nTotal moves : %d\n", lemin->moves, 92);
-	end(lemin);
+	//ft_mini_printf("\nNumber of moves : %d\n", input->moves);
+	end(input);
 	return;
 }

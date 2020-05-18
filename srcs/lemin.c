@@ -12,68 +12,60 @@
 
 #include "../includes/lemin.h"
 
-static void	set_values(t_lemin *init)
+static void	checks(t_lemin *input)
 {
-	if ((init->total = total()) == FALSE)
+	if ((input->total = total()) == FALSE)
 		ft_puterror_fd("Error: Invalid number of ants.", -1, 2);
-	if (input(init) == -1)
+	if (info(input) == -1)
 		ft_puterror_fd("Error: Reading failed.", -1, 2);
-	if (!init->room_list || !init->path_list)
+	if (!input->room_list || !input->path_list)
 		ft_puterror_fd("Error: Missing rooms or paths.", -1, 2);
-	init->ant_list = start_ants(init->total, init->room_list);
+	input->ant_list = startants(input->total, input->room_list);
 }
 
-t_lemin		*structure(int total_arg, char *argm[])
+t_lemin		*lemin(int num, char *arg[])
 {
-	t_lemin	*init;
+	t_lemin	*start;
 
-	if (!(init = (t_lemin *)malloc(sizeof(t_lemin))))
+	if (!(start = (t_lemin *)malloc(sizeof(t_lemin))))
 		ft_puterror_fd("Malloc failed.", -3, 2);
-	init->moves = 0;
-	init->room_list = NULL;
-	init->path_list = NULL;
-	init->arg.ant_wc = FALSE;
-	init->arg.path_wc = FALSE;
-	init->arg.room_wc = FALSE;
-	arg(total_arg, argm, init);
-	set_values(init);
-	return(init);
+	start->moves = 0;
+	start->room_list = NULL;
+	start->path_list = NULL;
+	input(num, arg);
+	checks(start);
+	return(start);
 }
 
-static void	move_ant(t_lemin *lemin, t_ant *ant, t_room *room)
+void		start(t_lemin *input)
 {
-	ant->room->filled = 0;
-	ant->last = ant->room;
-	ant->room = room;
-	ant->room->filled = 1;
-	lemin->moves += 1;
+	t_room	*room;
+	t_path	*path;
+	t_list	*testroom;
+	t_list	*testpath;
+
+	testroom = input->room_list;
+	while (testroom != 0)
+	{
+		room = (t_room *)testroom->content;
+		testpath = input->path_list;
+		while (testpath != 0)
+		{
+			path = (t_path *)testpath->content;
+			if (ft_strequ(path->door1, room->name))
+				room->paths = ft_lstpush(room->paths, roomname(path->door2, input->room_list));
+			if (ft_strequ(path->door2, room->name))
+				room->paths = ft_lstpush(room->paths, roomname(path->door1, input->room_list));
+			testpath = testpath->next;
+		}
+		testroom = testroom->next;
+	}
 	return;
 }
 
-void		start(t_lemin *lemin)
+int			validate(t_lemin *input)
 {
-	int		result;
-	int		distance;
-	t_list	*ls;
-	t_room	*tmp;
-	t_room	*next;
-
-	distance = FT_INT_MAX;
-	ls = lemin->ant_list->room->paths;
-	while (ls)
-	{
-		tmp = (t_room *)ls->content;
-		if ((tmp->flag == 3 || !tmp->filled) && tmp != lemin->ant_list->last)
-		{
-			result = find_room(tmp, 3);
-			if (result < distance && result > -1)
-			{
-				distance = result;
-				next = tmp;
-			}
-		}
-		ls = ls->next;
-	}
-	if (distance < FT_INT_MAX)
-		move_ant(lemin, lemin->ant_list, next);
+	return (pathvalidation(roomflag(1, input->room_list), input->path_list) \
+			&& flagvalidation(input->room_list, input->path_list) \
+			&& namevalidation(input->room_list));
 }

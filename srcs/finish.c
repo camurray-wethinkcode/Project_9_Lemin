@@ -12,47 +12,90 @@
 
 #include "../includes/lemin.h"
 
-static void	delete_room(void *data)
+static void	endroom(void *input)
 {
 	t_room	*room;
 
-	room = (t_room *)data;
+	room = (t_room *)input;
 	ft_strdel(&room->name);
 	ft_lst_rec_free(room->paths);
-	free(data);
-	data = NULL;
+	free(input);
+	input = NULL;
 	return;
 }
 
-static void	delete_path(void *data)
+static void	endpath(void *input)
 {
 	t_path	*path;
 
-	path = (t_path *)data;
+	path = (t_path *)input;
 	ft_strdel(&path->door1);
 	ft_strdel(&path->door2);
-	free(data);
-	data = NULL;
+	free(input);
+	input = NULL;
 	return;
 }
 
-void		end(t_lemin *lemin)
+void		end(t_lemin *input)
 {
-	if (lemin)
+	if (input)
 	{
-		if (lemin->room_list)
+		if (input->room_list)
 		{
-			ft_lstforeach(lemin->room_list, delete_room);
-			ft_lst_rec_free(lemin->room_list);
+			ft_lstforeach(input->room_list, endroom);
+			ft_lst_rec_free(input->room_list);
 		}
-		if (lemin->path_list)
+		if (input->path_list)
 		{
-			ft_lstforeach(lemin->path_list, delete_path);
-			ft_lst_rec_free(lemin->path_list);
+			ft_lstforeach(input->path_list, endpath);
+			ft_lst_rec_free(input->path_list);
 		}
-		if (lemin->ant_list)
-			ft_memdel((void **)&lemin->ant_list);
-		ft_memdel((void **)&lemin);
+		if (input->ant_list)
+			ft_memdel((void **)&input->ant_list);
+		ft_memdel((void **)&input);
 	}
 	return;
+}
+
+int	namevalidation(t_list *rooms)
+{
+	int		ans;
+	t_room	*test;
+
+	ans = 0;
+	if (rooms != 0)
+	{
+		while (rooms)
+		{
+			test = (t_room *)rooms->content;
+			if (test->name[0] == '#' || test->name[0] == 'L' || ft_strchr(test->name, '-') != 0)
+				break;
+			rooms = rooms->next;
+		}
+		ans = 1;
+	}
+	return (ans && !rooms);
+}
+
+int	flagvalidation(t_list *rooms, t_list *paths)
+{
+	int		start;
+	int		end;
+	t_room	*test;
+
+	start = 0;
+	end = 0;
+	if (rooms != 0 || paths != 0)
+	{
+		while (rooms)
+		{
+			test = (t_room *)rooms->content;
+			if (test->flag == 1)
+				start++;
+			if (test->flag == 3)
+				end++;
+			rooms = rooms->next;
+		}
+	}
+	return(start == 1 && end == 1);
 }
