@@ -22,3 +22,6 @@ Run the following commands:
 
 To run the program:
 `./lemin < path/to/map.txt`
+
+*NOTE*
+This program was written with Windows and does not seem to be compatibe with MacOS
