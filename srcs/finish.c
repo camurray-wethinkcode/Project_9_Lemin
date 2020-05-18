@@ -18,7 +18,7 @@ static void	endroom(void *input)
 
 	room = (t_room *)input;
 	ft_strdel(&room->name);
-	ft_lst_rec_free(room->paths);
+	ft_free(room->paths);
 	free(input);
 	input = NULL;
 	return;
@@ -43,12 +43,12 @@ void		end(t_lemin *input)
 		if (input->room_list)
 		{
 			ft_lstforeach(input->room_list, endroom);
-			ft_lst_rec_free(input->room_list);
+			ft_free(input->room_list);
 		}
 		if (input->path_list)
 		{
 			ft_lstforeach(input->path_list, endpath);
-			ft_lst_rec_free(input->path_list);
+			ft_free(input->path_list);
 		}
 		if (input->ant_list)
 			ft_memdel((void **)&input->ant_list);

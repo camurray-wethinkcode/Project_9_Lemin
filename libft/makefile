@@ -87,7 +87,7 @@ FILES = ft_atoi.c \
                 ft_lstpush.c \
                 ft_lstfind.c \
                 ft_lstdelnode.c \
-                ft_lst_rec_free.c \
+                ft_free.c \
                 ft_lstforeach.c \
                 ft_strlchr.c \
 
@@ -166,7 +166,7 @@ OBJ = ft_atoi.o \
           ft_lstpush.o \
           ft_lstfind.o \
           ft_lstdelnode.o \
-          ft_lst_rec_free.o \
+          ft_free.o \
           ft_lstforeach.o \
           ft_strlchr.o \
 

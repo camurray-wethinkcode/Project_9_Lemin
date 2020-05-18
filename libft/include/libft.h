@@ -132,7 +132,7 @@ char				*ft_strtrim(char const *s);
 void				ft_swap(int *a, int *b);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
-void				ft_lst_rec_free(t_list *first);
+void				ft_free(t_list *first);
 void				ft_lstdelnode(t_list **head, t_list *node, void (*del)(void*, size_t));
 t_list				*ft_lstfind(t_list *begin_list, void *data, int (*cmp)());
 void				ft_lstforeach(t_list *lst, void (*f)());
