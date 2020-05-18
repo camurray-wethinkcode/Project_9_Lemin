@@ -24,7 +24,7 @@ t_room		*roomname(char *name, t_list *list)
 		i = ft_strequ(name, test->name);
 		list = list->next;
 	}
-	return (i ? test : NULL);
+	return(i ? test : NULL);
 }
 
 t_ant		*startants(int total, t_list *rooms)

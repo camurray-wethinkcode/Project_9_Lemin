@@ -83,7 +83,7 @@ FILES = ft_atoi.c \
 		ft_intlen.c \
                 get_next_line.c \
                 ft_puterror_fd.c \
-                ft_mini_printf.c \
+                ft_printf.c \
                 ft_lstpush.c \
                 ft_lstfind.c \
                 ft_lstdelnode.c \
@@ -162,7 +162,7 @@ OBJ = ft_atoi.o \
 	  ft_intlen.o \
           get_next_line.o \
           ft_puterror_fd.o \
-          ft_mini_printf.o \
+          ft_printf.o \
           ft_lstpush.o \
           ft_lstfind.o \
           ft_lstdelnode.o \

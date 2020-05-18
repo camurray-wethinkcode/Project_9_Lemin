@@ -74,7 +74,7 @@ int	namevalidation(t_list *rooms)
 		}
 		ans = 1;
 	}
-	return (ans && !rooms);
+	return(ans && !rooms);
 }
 
 int	flagvalidation(t_list *rooms, t_list *paths)

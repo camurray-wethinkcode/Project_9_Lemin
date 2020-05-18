@@ -19,13 +19,13 @@ static int	move(t_ant *ant)
 	t_list	*list;
 	t_room	*test;
 
-	if (ant->room->flag == 3)
-		return(0);
 	i = 1;
 	move = 0;
+	if (ant->room->flag == 3)
+		return(0);
+	list = ant->room->paths;
 	if (ant->moved)
 		i = 0;
-	list = ant->room->paths;
 	while (i && list)
 	{
 		test = (t_room *)list->content;
@@ -104,7 +104,6 @@ void		loop(t_lemin *input)
 		reset(input->ant_list, input->total);
 		attempt(input);
 	}
-	//ft_mini_printf("\nNumber of moves : %d\n", input->moves);
 	end(input);
 	return;
 }

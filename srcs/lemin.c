@@ -65,7 +65,7 @@ void		start(t_lemin *input)
 
 int			validate(t_lemin *input)
 {
-	return (pathvalidation(roomflag(1, input->room_list), input->path_list) \
+	return(pathvalidation(roomflag(1, input->room_list), input->path_list) \
 			&& flagvalidation(input->room_list, input->path_list) \
 			&& namevalidation(input->room_list));
 }

@@ -39,7 +39,7 @@ static int	commandinput(char *input)
 		ans = 1;
 	else if (ft_strequ("##end", input))
 		ans = 3;
-	return (ans);
+	return(ans);
 }
 
 static int	roominput(char *input)
@@ -60,7 +60,7 @@ static int	roominput(char *input)
 		input++;
 	while (*input && ft_isdigit(*input))
 		input++;
-	return (*input != '\0' ? 0 : 1);
+	return(*input != '\0' ? 0 : 1);
 }
 
 static int	pathinput(char *input, t_list *room)
@@ -80,7 +80,7 @@ static int	pathinput(char *input, t_list *room)
 		test.door1 = NULL;
 		test.door2 = NULL;
 	}
-	return (ans);
+	return(ans);
 }
 
 int			info(t_lemin *input)

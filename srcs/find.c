@@ -19,14 +19,14 @@ int			froom(void *room, int flag)
 	int		quickest;
 	int		path;
 
+	quickest = 2147483647;
 	now = (t_room *)room;
+	try = now->paths;
 	if (now->flag == flag)
 		return (0);
 	if (now->occupied)
 		return (-1);
 	now->occupied = 1;
-	quickest = 2147483647;
-	try = now->paths;
 	while (try)
 	{
 		if ((path = froom(try->content, flag)) < quickest && path != -1)
@@ -34,7 +34,7 @@ int			froom(void *room, int flag)
 		try = try->next;
 	}
 	now->occupied = 0;
-	return (quickest == 2147483647 ? -1 : quickest);
+	return(quickest == 2147483647 ? -1 : quickest);
 }
 
 int			total(void)
@@ -57,12 +57,12 @@ int			total(void)
 	}
 	ant = (input != NULL && *input != '\0') ? atoi(input) : 0;
 	ft_memdel((void **)&input);
-	return (ant);
+	return(ant);
 }
 
 static void	error(char *arg)
 {
-	ft_mini_printf("Argument %s is invalid!\n", arg);
+	ft_printf("Argument %s is invalid!\n", arg);
 	exit(-2);
 	return;
 }
@@ -92,5 +92,5 @@ t_room		*roomflag(int flag, t_list *list)
 		i = test->flag == flag ? 1 : 0;
 		list = list->next;
 	}
-	return (i ? test : NULL);
+	return(i ? test : NULL);
 }

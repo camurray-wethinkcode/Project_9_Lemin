@@ -28,7 +28,7 @@ void		putcstr(char const *s, size_t col)
 	return ;
 }
 
-void		ft_mini_printf(const char *format, ...)
+void		ft_printf(const char *format, ...)
 {
 	va_list p;
 	char	*tmp;

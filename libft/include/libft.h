@@ -137,7 +137,7 @@ void				ft_lstdelnode(t_list **head, t_list *node, void (*del)(void*, size_t));
 t_list				*ft_lstfind(t_list *begin_list, void *data, int (*cmp)());
 void				ft_lstforeach(t_list *lst, void (*f)());
 t_list				*ft_lstpush(t_list *first, void *item);
-void				ft_mini_printf(const char *format, ...);
+void				ft_printf(const char *format, ...);
 void				ft_puterror_fd(char const *msg, int ret, int fd);
 size_t				ft_strlchr(const char *str, int c);
 
