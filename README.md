@@ -1,5 +1,5 @@
 # Project_9_Lemin
-A "Hex" simulator. Lemin is a program that prints the fastest way to get ants across a farm.
+A Hex simulator. Lemin is a program that prints the fastest way to get ants across a farm.
 
 Run the following commands:
 
