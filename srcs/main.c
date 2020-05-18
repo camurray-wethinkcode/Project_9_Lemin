@@ -22,7 +22,7 @@ int			main(int argc, char *argv[])
 	if (validate(input) != TRUE)
 	{
 		end(input);
-		ft_puterror_fd("Error: Something went wrong, check your input.", -1, 2);
+		ft_puterror_fd("Error: incorrect input.", -1, 2);
 	}
 	loop(input);
 	return(0);
