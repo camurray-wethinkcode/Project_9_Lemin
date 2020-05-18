@@ -16,4 +16,4 @@ To run the program:
 `./lemin < path/to/map`
 
 *NOTE*
-This program was written with Windows and does not seem to be compatibe with MacOS
+This program was written with Windows and does not seem to be compatible with MacOS
